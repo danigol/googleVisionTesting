@@ -7,7 +7,7 @@ public class Ratings {
 	 * Unknown = -1, Very likely = 4
 	 * @author Danielle Golinsky
 	 */
-	enum Likliness {
+	public enum Likliness {
 		UNKNOWN(-1),
 		VERY_UNLIKELY(0),
 		UNLIKELY(1),

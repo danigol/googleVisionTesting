@@ -12,6 +12,14 @@ public class Result {
 	private final Likliness violence;
 	private final Likliness racy;
 	
+	/**
+	 * @param _fileName
+	 * @param _adult
+	 * @param _spoof
+	 * @param _medical
+	 * @param _violence
+	 * @param _racy
+	 */
 	public Result(final String _fileName, 
 					final Likliness _adult,
 					final Likliness _spoof,
@@ -32,11 +40,11 @@ public class Result {
 				0, this.originalFileName.lastIndexOf("."));
 		String extension = this.originalFileName.replace(fileNameNoExtension, "");
 		String results = String.format("a-%d_s-%d_m-%d_v-%d_r-%d", 
-				this.adult,
-				this.spoof,
-				this.medical,
-				this.violence,
-				this.racy);
+				this.adult.getValue(),
+				this.spoof.getValue(),
+				this.medical.getValue(),
+				this.violence.getValue(),
+				this.racy.getValue());
 		
 		return fileNameNoExtension + "_" + results + extension;
 	}
