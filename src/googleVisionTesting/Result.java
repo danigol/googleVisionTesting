@@ -20,7 +20,7 @@ public class Result {
 	 * @param _violence
 	 * @param _racy
 	 */
-	public Result(final String _fileName, 
+	public Result(final String _fileName,
 					final Likliness _adult,
 					final Likliness _spoof,
 					final Likliness _medical,

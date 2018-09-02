@@ -39,6 +39,14 @@ public class ResultGroup {
 		this.childGroupNames = new ArrayList<String>();
 	}
 	
+	public ResultGroup(final String _resultGroupName,
+			final TreeMap<String, Result> _resultsList) {
+			this.resultGroupName = _resultGroupName;
+			this.parentGroupName = "";
+			this.resultsList = _resultsList;
+			this.childGroupNames = new ArrayList<String>();
+	}
+		
 	public String getGroupName() {
 		return this.resultGroupName;
 	}
@@ -71,5 +79,9 @@ public class ResultGroup {
 			allResults.append(resultsList.get(r));
 		}
 		return allResults.toString();
+	}
+	
+	public void addResult(Result result) {
+		this.resultsList.put(result.getOriginalFileName(), result);
 	}
 }
