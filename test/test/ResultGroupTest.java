@@ -2,6 +2,7 @@ package test;
 
 import org.junit.Test;
 
+import googleVisionTesting.Ratings;
 import googleVisionTesting.Ratings.Likliness;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ResultGroupTest {
 	private Result pTestResult;
 	private Result ulTestResult;
 	private Result vulTestResult;
+	private Result unknownTestResult;
 	
 	private List<Result> results;
 	
@@ -39,6 +41,8 @@ public class ResultGroupTest {
 				Likliness.UNLIKELY, Likliness.UNLIKELY, Likliness.UNLIKELY);
 		vulTestResult = new Result("test0.jpg", Likliness.VERY_UNLIKELY, Likliness.VERY_UNLIKELY, 
 				Likliness.VERY_UNLIKELY, Likliness.VERY_UNLIKELY, Likliness.VERY_UNLIKELY);
+		unknownTestResult = new Result("test-1.jpg", Likliness.UNKNOWN, Likliness.UNKNOWN, Likliness.UNKNOWN, 
+				Likliness.UNKNOWN, Likliness.UNKNOWN);
 		
 		results = new ArrayList<Result>();
 		results.add(vlTestResult);
@@ -46,6 +50,7 @@ public class ResultGroupTest {
 		results.add(pTestResult);
 		results.add(ulTestResult);
 		results.add(vulTestResult);
+		results.add(unknownTestResult);
 		// We use a sorted tree map in ResultGroup based on the original name as a key
 		// Therefore, sort before we test
 		Collections.sort(results); 
@@ -77,6 +82,10 @@ public class ResultGroupTest {
 		Assert.assertEquals("Results group did not contain all results.",
 				getAllResultsString(), 
 				subject.getAllResultsString());
+		
+		Assert.assertEquals("Could not get a result by file name.", vlTestResult, subject.getResult("test4.jpg"));
+		Assert.assertEquals("Could not get a result by file name.", vulTestResult, subject.getResult("test0.jpg"));
+		Assert.assertNotNull("Test Result Map should never be null.", subject.getResultsList());
 	}
 	
 	private ArrayList<String> getChildNames() {
@@ -124,6 +133,7 @@ public class ResultGroupTest {
 				subject.getGroupName());
 		// Verify each test result is present
 		testContents();
+		Assert.assertEquals("Child group names did not match.", getChildNames(), subject.getChildGroupNames());
 	}
 	
 	@Test
@@ -136,6 +146,8 @@ public class ResultGroupTest {
 				subject.getGroupName());
 		// Verify each test result is present
 		testContents();		
+		Assert.assertEquals("Child group names did not match.", getChildNames(), subject.getChildGroupNames());
+		Assert.assertEquals("Map did not match provided map.", getResultMap(), subject.getResultsList());
 	}
 	
 	@Test
@@ -148,6 +160,8 @@ public class ResultGroupTest {
 				subject.getGroupName());
 		// Verify each test result is present
 		testContents();		
+		Assert.assertEquals("Child group names did not match.", getChildNames(), subject.getChildGroupNames());
+		Assert.assertEquals("Map did not match provided map.", getResultMap(), subject.getResultsList());
 	}
 	
 	@Test
@@ -183,5 +197,25 @@ public class ResultGroupTest {
 				subject.getParentGroupName());
 		// Verify each test result is present
 		testContents();
+		Assert.assertEquals("Map did not match provided map.", getResultMap(), subject.getResultsList());
 	}
+	
+	@Test
+	public void testChildGroupProvidedMapProvidedChildNames() {
+		String subjectGroupName = "ChildGroup";
+		String subjectParentGroupName = "ParentGroup";
+		subject = new ResultGroup(subjectGroupName, subjectParentGroupName, getChildNames(), getResultMap());
+		
+		Assert.assertEquals("Group name did not match",
+				subjectGroupName,
+				subject.getGroupName());
+		
+		Assert.assertEquals("Parent Group name did not match",
+				subjectParentGroupName,
+				subject.getParentGroupName());
+		// Verify each test result is present
+		testContents();
+		Assert.assertEquals("Child group names did not match.", getChildNames(), subject.getChildGroupNames());
+		Assert.assertEquals("Map did not match provided map.", getResultMap(), subject.getResultsList());
+	}	
 }

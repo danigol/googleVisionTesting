@@ -47,6 +47,7 @@ public class ResultTest {
 		Assert.assertEquals("Result Racy did not match.",
 				Likliness.VERY_UNLIKELY,
 				subject.getRacyLikliness());
+		Assert.assertEquals("Results file name did not match", testResultsFileName, subject.getResultFileName());
 		
 		Assert.assertEquals("Result output did not match expectation.",
 				expectedResultsString,
