@@ -1,6 +1,7 @@
 package googleVisionTesting;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -15,36 +16,39 @@ public class ResultGroup {
 	private ArrayList<String> childGroupNames;
 	private TreeMap<String, Result> resultsList;
 	
-	public ResultGroup(final String _resultGroupName) {
+	public ResultGroup(final String _resultGroupName, final ArrayList<String> _childGroupNames) {
 		this.resultGroupName = _resultGroupName;
 		this.parentGroupName = "";
 		this.resultsList = new TreeMap<String, Result>();
-		this.childGroupNames = new ArrayList<String>();
-	}
-	
-	public ResultGroup(final String _resultGroupName,
-						final String _parentGroupName) {
-		this.resultGroupName = _resultGroupName;
-		this.parentGroupName = _parentGroupName;
-		this.resultsList = new TreeMap<String, Result>();
-		this.childGroupNames = new ArrayList<String>();
+		this.childGroupNames = _childGroupNames;
 	}
 	
 	public ResultGroup(final String _resultGroupName,
 						final String _parentGroupName,
-						final TreeMap<String, Result> _resultsList) {
+						final ArrayList<String> _childGroupNames) {
 		this.resultGroupName = _resultGroupName;
 		this.parentGroupName = _parentGroupName;
-		this.resultsList = _resultsList;
-		this.childGroupNames = new ArrayList<String>();
+		this.resultsList = new TreeMap<String, Result>();
+		this.childGroupNames = _childGroupNames;
 	}
 	
 	public ResultGroup(final String _resultGroupName,
-			final TreeMap<String, Result> _resultsList) {
+						final String _parentGroupName,
+						final TreeMap<String, Result> _resultsList,
+						final ArrayList<String> _childGroupNames) {
+		this.resultGroupName = _resultGroupName;
+		this.parentGroupName = _parentGroupName;
+		this.resultsList = _resultsList;
+		this.childGroupNames = _childGroupNames;
+	}
+	
+	public ResultGroup(final String _resultGroupName,
+			final TreeMap<String, Result> _resultsList,
+			final ArrayList<String> _childGroupNames) {
 			this.resultGroupName = _resultGroupName;
 			this.parentGroupName = "";
 			this.resultsList = _resultsList;
-			this.childGroupNames = new ArrayList<String>();
+			this.childGroupNames = _childGroupNames;
 	}
 		
 	public String getGroupName() {
@@ -76,7 +80,7 @@ public class ResultGroup {
 		StringBuilder allResults = new StringBuilder();
 		Set<String> results = resultsList.keySet();
 		for (String r : results) {
-			allResults.append(resultsList.get(r));
+			allResults.append(resultsList.get(r).getResultString());
 		}
 		return allResults.toString();
 	}
