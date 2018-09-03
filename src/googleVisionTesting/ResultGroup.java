@@ -1,7 +1,6 @@
 package googleVisionTesting;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -16,39 +15,27 @@ public class ResultGroup {
 	private ArrayList<String> childGroupNames;
 	private TreeMap<String, Result> resultsList;
 	
-	public ResultGroup(final String _resultGroupName, final ArrayList<String> _childGroupNames) {
-		this.resultGroupName = _resultGroupName;
-		this.parentGroupName = "";
-		this.resultsList = new TreeMap<String, Result>();
-		this.childGroupNames = _childGroupNames;
-	}
-	
-	public ResultGroup(final String _resultGroupName,
-						final String _parentGroupName,
-						final ArrayList<String> _childGroupNames) {
+	public ResultGroup(final String _resultGroupName, final String _parentGroupName) {
 		this.resultGroupName = _resultGroupName;
 		this.parentGroupName = _parentGroupName;
+		this.childGroupNames = null;
 		this.resultsList = new TreeMap<String, Result>();
-		this.childGroupNames = _childGroupNames;
 	}
 	
-	public ResultGroup(final String _resultGroupName,
-						final String _parentGroupName,
-						final TreeMap<String, Result> _resultsList,
+	public ResultGroup(final String _resultGroupName, final String _parentGroupName,
 						final ArrayList<String> _childGroupNames) {
-		this.resultGroupName = _resultGroupName;
-		this.parentGroupName = _parentGroupName;
-		this.resultsList = _resultsList;
-		this.childGroupNames = _childGroupNames;
-	}
-	
-	public ResultGroup(final String _resultGroupName,
-			final TreeMap<String, Result> _resultsList,
-			final ArrayList<String> _childGroupNames) {
 			this.resultGroupName = _resultGroupName;
-			this.parentGroupName = "";
-			this.resultsList = _resultsList;
+			this.parentGroupName = _parentGroupName;
 			this.childGroupNames = _childGroupNames;
+			this.resultsList = new TreeMap<String, Result>();
+	}
+	
+	public ResultGroup(final String _resultGroupName, final String _parentGroupName,
+						final ArrayList<String> _childGroupNames, final TreeMap<String, Result> _resultsList) {
+		this.resultGroupName = _resultGroupName;
+		this.parentGroupName = _parentGroupName;
+		this.childGroupNames = _childGroupNames;
+		this.resultsList = _resultsList;
 	}
 		
 	public String getGroupName() {
@@ -87,5 +74,9 @@ public class ResultGroup {
 	
 	public void addResult(Result result) {
 		this.resultsList.put(result.getOriginalFileName(), result);
+	}
+	
+	public void addResults(final TreeMap<String, Result> _resultList) {
+		this.resultsList.putAll(resultsList);
 	}
 }

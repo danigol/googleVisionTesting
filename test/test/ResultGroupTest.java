@@ -90,7 +90,7 @@ public class ResultGroupTest {
 	@Test
 	public void testParentGroupNameOnlyNoChildGroups() {
 		String subjectGroupName = "ParentGroup";
-		subject = new ResultGroup(subjectGroupName, new ArrayList<String>());
+		subject = new ResultGroup(subjectGroupName, "");
 		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
@@ -103,7 +103,7 @@ public class ResultGroupTest {
 	@Test
 	public void testParentGroupProvidedMapNoChildGroups() {
 		String subjectGroupName = "ParentGroup";
-		subject = new ResultGroup(subjectGroupName, getResultMap(), new ArrayList<String>());
+		subject = new ResultGroup(subjectGroupName, "");
 		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
@@ -116,7 +116,7 @@ public class ResultGroupTest {
 	@Test
 	public void testParentGroupNameOnly() {
 		String subjectGroupName = "ParentGroup";
-		subject = new ResultGroup(subjectGroupName, getChildNames());
+		subject = new ResultGroup(subjectGroupName, "", getChildNames());
 		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
@@ -129,7 +129,7 @@ public class ResultGroupTest {
 	@Test
 	public void testParentGroupProvidedMap() {
 		String subjectGroupName = "ParentGroup";
-		subject = new ResultGroup(subjectGroupName, getResultMap(), getChildNames());
+		subject = new ResultGroup(subjectGroupName, "", getChildNames(), getResultMap());
 		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
@@ -143,7 +143,7 @@ public class ResultGroupTest {
 	public void testChildGroupNamesOnly() {
 		String subjectGroupName = "ChildGroup";
 		String subjectParentGroupName = "ParentGroup";
-		subject = new ResultGroup(subjectGroupName, subjectParentGroupName, new ArrayList<String>());
+		subject = new ResultGroup(subjectGroupName, subjectParentGroupName);
 		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
@@ -161,7 +161,7 @@ public class ResultGroupTest {
 	public void testChildGroupProvidedMap() {
 		String subjectGroupName = "ChildGroup";
 		String subjectParentGroupName = "ParentGroup";
-		subject = new ResultGroup(subjectGroupName, subjectParentGroupName, getResultMap(), new ArrayList<String>());
+		subject = new ResultGroup(subjectGroupName, subjectParentGroupName, null, getResultMap());
 		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
