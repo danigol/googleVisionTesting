@@ -76,7 +76,7 @@ public class ResultGroup {
 		this.resultsList.put(result.getOriginalFileName(), result);
 	}
 	
-	public void addResults(final TreeMap<String, Result> _resultList) {
-		this.resultsList.putAll(resultsList);
+	public void addResults(final TreeMap<String, Result> _resultsList) {
+		this.resultsList.putAll(_resultsList);
 	}
 }

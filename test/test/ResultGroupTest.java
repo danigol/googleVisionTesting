@@ -139,6 +139,18 @@ public class ResultGroupTest {
 	}
 	
 	@Test
+	public void testParentGroupAddMap() {
+		String subjectGroupName = "ParentGroup";
+		subject = new ResultGroup(subjectGroupName, "", getChildNames());
+		subject.addResults(getResultMap());
+		Assert.assertEquals("Group name did not match",
+				subjectGroupName,
+				subject.getGroupName());
+		// Verify each test result is present
+		testContents();		
+	}
+	
+	@Test
 	public void testChildGroupNamesOnly() {
 		String subjectGroupName = "ChildGroup";
 		String subjectParentGroupName = "ParentGroup";
