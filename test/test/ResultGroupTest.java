@@ -130,7 +130,6 @@ public class ResultGroupTest {
 	public void testParentGroupProvidedMap() {
 		String subjectGroupName = "ParentGroup";
 		subject = new ResultGroup(subjectGroupName, "", getChildNames(), getResultMap());
-		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
 				subjectGroupName,
@@ -162,7 +161,6 @@ public class ResultGroupTest {
 		String subjectGroupName = "ChildGroup";
 		String subjectParentGroupName = "ParentGroup";
 		subject = new ResultGroup(subjectGroupName, subjectParentGroupName, null, getResultMap());
-		addAllToSubject();
 		
 		Assert.assertEquals("Group name did not match",
 				subjectGroupName,
