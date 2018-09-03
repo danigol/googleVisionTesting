@@ -1,13 +1,13 @@
 package googleVisionTesting;
 
-public class Ratings {
+public final class Ratings {
 
 	/**
 	 * Likeliness values are Unknown, Very Unlikely, Unlikely, Possible, Likely, and Very Likely
 	 * Unknown = -1, Very likely = 4
 	 * @author Danielle Golinsky
 	 */
-	public enum Likliness {
+	public static enum Likliness {
 		UNKNOWN(-1),
 		VERY_UNLIKELY(0),
 		UNLIKELY(1),

@@ -2,7 +2,7 @@ package googleVisionTesting;
 
 import googleVisionTesting.Ratings.Likliness;
 
-public class Result {
+public class Result implements Comparable<Result>{
 	
 	private final String originalFileName;
 	private final String resultFileName;
@@ -87,4 +87,9 @@ public class Result {
 				+ "    Racy Likliness: " + this.racy.getValue() + "\n\n";
 	}
 	
+	
+	@Override
+	public int compareTo(Result r) {
+		return this.getOriginalFileName().compareTo(r.getOriginalFileName());
+	}
 }

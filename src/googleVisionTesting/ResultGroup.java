@@ -15,36 +15,27 @@ public class ResultGroup {
 	private ArrayList<String> childGroupNames;
 	private TreeMap<String, Result> resultsList;
 	
-	public ResultGroup(final String _resultGroupName) {
-		this.resultGroupName = _resultGroupName;
-		this.parentGroupName = "";
-		this.resultsList = new TreeMap<String, Result>();
-		this.childGroupNames = new ArrayList<String>();
-	}
-	
-	public ResultGroup(final String _resultGroupName,
-						final String _parentGroupName) {
+	public ResultGroup(final String _resultGroupName, final String _parentGroupName) {
 		this.resultGroupName = _resultGroupName;
 		this.parentGroupName = _parentGroupName;
+		this.childGroupNames = null;
 		this.resultsList = new TreeMap<String, Result>();
-		this.childGroupNames = new ArrayList<String>();
 	}
 	
-	public ResultGroup(final String _resultGroupName,
-						final String _parentGroupName,
-						final TreeMap<String, Result> _resultsList) {
-		this.resultGroupName = _resultGroupName;
-		this.parentGroupName = _parentGroupName;
-		this.resultsList = _resultsList;
-		this.childGroupNames = new ArrayList<String>();
-	}
-	
-	public ResultGroup(final String _resultGroupName,
-			final TreeMap<String, Result> _resultsList) {
+	public ResultGroup(final String _resultGroupName, final String _parentGroupName,
+						final ArrayList<String> _childGroupNames) {
 			this.resultGroupName = _resultGroupName;
-			this.parentGroupName = "";
-			this.resultsList = _resultsList;
-			this.childGroupNames = new ArrayList<String>();
+			this.parentGroupName = _parentGroupName;
+			this.childGroupNames = _childGroupNames;
+			this.resultsList = new TreeMap<String, Result>();
+	}
+	
+	public ResultGroup(final String _resultGroupName, final String _parentGroupName,
+						final ArrayList<String> _childGroupNames, final TreeMap<String, Result> _resultsList) {
+		this.resultGroupName = _resultGroupName;
+		this.parentGroupName = _parentGroupName;
+		this.childGroupNames = _childGroupNames;
+		this.resultsList = _resultsList;
 	}
 		
 	public String getGroupName() {
@@ -76,12 +67,16 @@ public class ResultGroup {
 		StringBuilder allResults = new StringBuilder();
 		Set<String> results = resultsList.keySet();
 		for (String r : results) {
-			allResults.append(resultsList.get(r));
+			allResults.append(resultsList.get(r).getResultString());
 		}
 		return allResults.toString();
 	}
 	
 	public void addResult(Result result) {
 		this.resultsList.put(result.getOriginalFileName(), result);
+	}
+	
+	public void addResults(final TreeMap<String, Result> _resultsList) {
+		this.resultsList.putAll(_resultsList);
 	}
 }
